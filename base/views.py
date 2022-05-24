@@ -51,8 +51,9 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('tasks')
     template_name = 'base/task_form.html'
 
-    def form_valid(self, form: _ModelFormT) -> HttpResponse:
-        return super().form_valid(form)
+    def form_valid(self, form) -> HttpResponse:
+        form.instance.user = self.request.user
+        return super(TaskCreate, self).form_valid(form)
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
