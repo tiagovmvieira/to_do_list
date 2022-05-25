@@ -4,9 +4,9 @@ WORKDIR /usr/src/app
 
 COPY requirements.txt ./
 
-RUN pip install --noc-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-#copy
+#copy source code
 COPY . .
 
 CMD ["python3", "manage.py", "runserver"]
