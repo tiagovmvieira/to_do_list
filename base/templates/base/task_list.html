@@ -1,12 +1,13 @@
 {% extends 'base/main.html' %}
 {% block content %}
+{% load static %}
 
 <div class = "header-bar">
     <div>
         <h1>Hello {{request.user|title}}</h1>
-        <h3 style = "margin:0">You have <i>{{count}}</i> incomplete task{{ count|pluralize:"s" }}</h3>
+        <h3 style = "margin:0">You have {{count}} incomplete task{{ count|pluralize:"s" }}</h3>
     </div>
-
+    <img class = 'ctw-image' src="{% static 'images/CTW_Symbol_transp_background.svg' %}">
     {% if request.user.is_authenticated %}
         <a href = "{% url 'logout' %}">Logout</a>    
     {% else %}
@@ -17,9 +18,9 @@
 <div id = "search-add-wrapper">
     <form method = "GET" style = "margin-top: 20px;display: flex;">
         <input type = 'text' name = 'search-area' value = "{{search_input}}"> 
-        <input type = 'submit' value = 'Search'>
+        <input class = "button" type = 'submit' value = 'Search'>
     </form>
-    <a id = "add-link " href = "{% url 'task-create' %}">&#43;</a>
+    <a id="add-link" href = "{%url 'task-create' %}">&#x2b;</a>
 </div>
 
 <div class="task-items-wrapper">
@@ -40,8 +41,12 @@
         {% endif %}
     </div>
     {% empty %}
-    <h3>No items in list</h3>
+    <div style="text-align: center; padding-bottom: 10px; line-height: 1em;">
+        <h3>No new task is created.</h3>
+        <h3> Create a <a style="text-decoration: none; color: #e53935;" href={% url 'task-create' %}">New task</a> ! </h3>
+    </div>
     {% endfor %}
 </div>
+
 {% endblock content %}
 
