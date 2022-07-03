@@ -23,8 +23,13 @@ class TestModels(TestCase):
 
     def test_to_do_list_user_label(self):
         to_do_list = ToDoList.objects.get(id = 1)
-        title_label = to_do_list._meta.get_field('user').verbose_name
-        self.assertEqual(title_label, 'user')
+        user_label = to_do_list._meta.get_field('user').verbose_name
+        self.assertEqual(user_label, 'user')
+
+    def test_to_item_title_label(self):
+        to_do_item = ToDoItem.objects.get(id = 1)
+        title_label = to_do_item._meta.get_field('title').verbose_name
+        self.assertEqual(title_label, 'title')
 
     """
     def test_to_do_item_title_label(self):
